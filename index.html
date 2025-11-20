@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EMIL NIYAZOV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --mx: 50%;
+      --my: 50%;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at var(--mx) var(--my),
+        #151515 0,
+        #050505 55%,
+        #000 100%);
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      text-align: center;
+      position: relative;
+    }
+
+    /* Floating shell for subtle up–down motion */
+    .logo-shell {
+      display: inline-block;
+      animation: float 4s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* The part that actually jumps away from the cursor */
+    .logo {
+      display: inline-block;
+      transform: translate(var(--tx, 0), var(--ty, 0));
+      transition: transform 240ms ease-out;
+      cursor: pointer;
+    }
+
+    .logo svg {
+      width: 80vw;
+      max-width: 800px;
+    }
+
+    .logo text {
+      fill: #e51616;
+      font-size: 68px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      transition: filter 200ms ease, fill 200ms ease;
+    }
+
+    .logo:hover text {
+      fill: #ff3b3b;
+      filter: drop-shadow(0 0 14px rgba(255, 59, 59, 0.9));
+    }
+
+    /* COMING SOON loader */
+    .coming-soon {
+      margin-top: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      font-size: 23px;
+      color: #a1a1a1;
+      opacity: 0.9;
+    }
+
+    .coming-soon .label {
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e51616;
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.15s; }
+    .dot:nth-child(3) { animation-delay: 0.3s; }
+
+    /* Animations */
+    @keyframes float {
+      0%   { transform: translateY(0); }
+      50%  { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40%          { transform: translateY(-6px); opacity: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .logo text {
+        font-size: 34px;
+        letter-spacing: 3px;
+      }
+      .coming-soon {
+        font-size: 11px;
+        letter-spacing: 0.25em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Floating + jumpy name -->
+    <div class="logo-shell">
+      <div class="logo">
+        <svg viewBox="0 0 1000 400">
+          <defs>
+            <!-- Subtle upward curve -->
+            <path id="curve" d="M 120 250 Q 500 150 880 250" />
+          </defs>
+
+          <text text-anchor="middle">
+            <textPath href="#curve" startOffset="50%">
+              EMIL NIYAZOV
+            </textPath>
+          </text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Loading-style "Coming soon" -->
+    <div class="coming-soon">
+      <span class="label">COMING SOON</span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <script>
+    // Spotlight follows mouse
+    window.addEventListener("pointermove", (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty("--mx", x + "%");
+      document.documentElement.style.setProperty("--my", y + "%");
+    });
+
+    // Logo jumps away from cursor
+    const logo = document.querySelector(".logo");
+
+    function jumpAway() {
+      const radius = 150; // distance from center
+      const angle = Math.random() * Math.PI * 2;
+      const tx = Math.cos(angle) * radius;
+      const ty = Math.sin(angle) * radius;
+
+      logo.style.setProperty("--tx", tx + "px");
+      logo.style.setProperty("--ty", ty + "px");
+    }
+
+    // Every time pointer touches/moves over the logo, it jumps
+    logo.addEventListener("pointerenter", jumpAway);
+    logo.addEventListener("pointermove", jumpAway);
+  </script>
+</body>
+</html>
