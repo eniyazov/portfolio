@@ -2,184 +2,851 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Data Specialist Portfolio</title>
+  <title>Emil Niyazov — Data Science Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="/images/en_logo.jpg" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --mx: 50%;
-      --my: 50%;
+      --bg: #f7f9fc;
+      --bg-2: #eef3ff;
+      --text: #0f172a;
+      --muted: #5b6b86;
+      --accent: #2b6fff;
+      --accent-2: #1d4ed8;
+      --card: #ffffff;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --shadow-hover: 0 20px 50px rgba(15, 23, 42, 0.12);
+      --radius: 18px;
+      --maxw: 1200px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      height: 100vh;
+      font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #dfe9ff 0, rgba(223, 233, 255, 0) 70%),
+        radial-gradient(900px 500px at 90% 0%, #e8f0ff 0, rgba(232, 240, 255, 0) 70%),
+        var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(247, 249, 252, 0.8);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .nav-inner {
+      height: 72px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      background:
-        radial-gradient(circle at var(--mx) var(--my),
-        #151515 0,
-        #050505 55%,
-        #000 100%);
-      color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      overflow: hidden;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    .wrapper {
-      text-align: center;
-      position: relative;
-    }
-
-    /* Floating shell for subtle up–down motion */
-    .logo-shell {
-      display: inline-block;
-      animation: float 4s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    /* The part that actually jumps away from the cursor */
     .logo {
-      display: inline-block;
-      transform: translate(var(--tx, 0), var(--ty, 0));
-      transition: transform 240ms ease-out;
+      font-family: "Fraunces", serif;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a { transition: color 150ms ease; }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, color 150ms ease;
       cursor: pointer;
     }
 
-    .logo svg {
-      width: 80vw;
-      max-width: 800px;
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 24px rgba(43, 111, 255, 0.24);
     }
 
-    .logo text {
-      fill: #e51616;
-      font-size: 68px;
-      font-weight: 800;
-      letter-spacing: 4px;
+    .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px) scale(1.02); }
+
+    .btn-ghost {
+      border-color: rgba(15, 23, 42, 0.12);
+      color: var(--text);
+      background: white;
+    }
+
+    .btn-ghost:hover { transform: translateY(-1px) scale(1.02); box-shadow: var(--shadow); }
+
+    .section { padding: 90px 0; }
+
+    .hero {
+      padding: 110px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 50px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-size: 14px;
       text-transform: uppercase;
-      transition: filter 200ms ease, fill 200ms ease;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 12px;
     }
 
-    .logo:hover text {
-      fill: #ff3b3b;
-      filter: drop-shadow(0 0 14px rgba(255, 59, 59, 0.9));
+    h1 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.05;
+      margin-bottom: 16px;
     }
 
-    /* COMING SOON loader */
-    .coming-soon {
-      margin-top: 40px;
-      display: inline-flex;
+    .hero-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: #334155;
+      margin-bottom: 28px;
+      max-width: 560px;
+    }
+
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .hero-card {
+      background: var(--card);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -60px;
+      top: -80px;
+      background: radial-gradient(circle, rgba(43, 111, 255, 0.2), transparent 70%);
+    }
+
+    .hero-visual {
+      height: 320px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, #e7efff 0%, #ffffff 100%);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 30px;
+    }
+
+    .hero-visual h3 { font-size: 18px; margin-bottom: 10px; }
+
+    .section-title {
+      font-family: "Fraunces", serif;
+      font-size: clamp(28px, 3.4vw, 40px);
+      margin-bottom: 12px;
+    }
+
+    .underline {
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 999px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .underline::after {
+      content: "";
+      position: absolute;
+      left: -30%;
+      width: 30%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      animation: underline 2.4s ease-in-out infinite;
+    }
+
+    @keyframes underline {
+      0% { left: -30%; }
+      50% { left: 100%; }
+      100% { left: 100%; }
+    }
+
+    .muted { color: var(--muted); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 20px;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 2px;
+      height: calc(100% - 16px);
+      background: rgba(43, 111, 255, 0.2);
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: 22px;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(43, 111, 255, 0.15);
+    }
+
+    .timeline .role { font-weight: 600; font-size: 18px; }
+    .timeline .company { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #eef3ff;
+      font-size: 12px;
+      color: var(--accent-2);
+      border: 1px solid rgba(43, 111, 255, 0.2);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .tag:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(43, 111, 255, 0.12); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      display: grid;
+      gap: 14px;
+    }
+
+    .project-meta {
+      display: flex;
       align-items: center;
       gap: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.35em;
-      font-size: 23px;
-      color: #a1a1a1;
-      opacity: 0.9;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
     }
 
-    .coming-soon .label {
-      white-space: nowrap;
+    .project-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
     }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #e51616;
-      animation: bounce 1s infinite ease-in-out;
+    .thumbs button {
+      border: none;
+      background: #e5edff;
+      border-radius: 12px;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
     }
 
-    .dot:nth-child(2) { animation-delay: 0.15s; }
-    .dot:nth-child(3) { animation-delay: 0.3s; }
+    .thumbs img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Animations */
-    @keyframes float {
-      0%   { transform: translateY(0); }
-      50%  { transform: translateY(-6px); }
-      100% { transform: translateY(0); }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      z-index: 100;
     }
 
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-      40%          { transform: translateY(-6px); opacity: 1; }
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: min(900px, 90vw);
+      max-height: 80vh;
+      border-radius: 18px;
+      box-shadow: var(--shadow-hover);
     }
 
-    @media (max-width: 480px) {
-      .logo text {
-        font-size: 34px;
-        letter-spacing: 3px;
-      }
-      .coming-soon {
-        font-size: 11px;
-        letter-spacing: 0.25em;
-      }
+    .education-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      font-family: inherit;
+      font-size: 14px;
+      background: white;
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    footer {
+      padding: 28px 0 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 980px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid, .books-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .skills-grid, .books-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 90px; }
+      .nav-inner { height: 64px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <!-- Floating + jumpy name -->
-    <div class="logo-shell">
-      <div class="logo">
-        <svg viewBox="0 0 1000 400">
-          <defs>
-            <!-- Subtle upward curve -->
-            <path id="curve" d="M 120 250 Q 500 150 880 250" />
-          </defs>
-
-          <text text-anchor="middle">
-            <textPath href="#curve" startOffset="50%">
-              EMIL NIYAZOV
-            </textPath>
-          </text>
-        </svg>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#top">EN</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#books">Books</a>
+        <a href="#contact">Contact</a>
       </div>
+      <a class="btn btn-primary" href="/Emil_Niyazov_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
     </div>
+  </nav>
 
-    <!-- Loading-style "Coming soon" -->
-    <div class="coming-soon">
-      <span class="label">COMING SOON</span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Portfolio</div>
+          <h1>Emil Niyazov</h1>
+          <div class="hero-title">Data Science MSc Student & Data Analyst</div>
+          <p>
+            Data science student with 2+ years of experience in machine learning, analytics, and Python/SQL development.
+            Skilled in building data pipelines, automation, NLP, dashboarding, and turning text, image, and structured data
+            into actionable insights.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-ghost" href="/Emil_Niyazov_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-visual">
+            <div>
+              <h3>Data + Design</h3>
+              <p class="muted">Building clean, insight-driven products and dashboards.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="underline"></div>
+        <div class="about-grid">
+          <div class="card reveal">
+            <p class="muted">
+              I focus on turning complex data into clear, decision-ready insights. My work spans real-estate analytics,
+              NLP for document intelligence, and spatial dashboards. I enjoy projects that combine data engineering,
+              visualization, and automation to create practical, measurable impact.
+            </p>
+          </div>
+          <div class="card reveal" data-delay="120">
+            <div class="list">
+              <div>Location: Sheffield, United Kingdom</div>
+              <div>Focus: Machine Learning, Analytics, Visualization</div>
+              <div>Open to: Research, Data Analyst, ML Roles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="underline"></div>
+        <div class="timeline">
+          <div class="timeline-item card reveal">
+            <div class="role">Data Analyst — PMD Group</div>
+            <div class="company">Baku, Azerbaijan · Jun 2024 – Present</div>
+            <ul class="list">
+              <li>Built ML & NLP tools to detect anomalies and extract insights from real-estate images and descriptions.</li>
+              <li>Engineered automated web scraping → transformation → SQL pipelines for clean analytical datasets.</li>
+              <li>Designed Tableau dashboards and an internal GIS app for spatial analysis and reporting.</li>
+            </ul>
+          </div>
+          <div class="timeline-item card reveal" data-delay="80">
+            <div class="role">Content Analyst — Nizami Ganjavi International Center</div>
+            <div class="company">Baku, Azerbaijan · Jan 2024 – May 2024</div>
+            <ul class="list">
+              <li>Researched and prepared talking points for high-level speeches and international forums.</li>
+              <li>Helped coordinate Global Baku Forums and manage diverse stakeholders.</li>
+            </ul>
+          </div>
+          <div class="timeline-item card reveal" data-delay="160">
+            <div class="role">Intern Business Analyst — EKVITA</div>
+            <div class="company">Baku, Azerbaijan · Jun 2023 – Sep 2023</div>
+            <ul class="list">
+              <li>Training in consulting methods, communication, and problem-solving.</li>
+              <li>Participated in workshops on digital trends and industry-specific analysis.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="underline"></div>
+        <div class="projects-grid">
+          <div class="card project-card reveal">
+            <div>
+              <h3>Baku Primary Market Residential Report 2022–2025</h3>
+              <p class="muted">Interactive Tableau story analyzing the primary residential market in Baku with trends, price dynamics, and key metrics for 2022–2025.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Tableau</span>
+              <span class="tag">Real Estate Analytics</span>
+              <span class="tag">Data Visualization</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="https://public.tableau.com/app/profile/pmd.group/viz/PrimaryMarketResidential-2022-2025/Story1" target="_blank" rel="noopener">View Project</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="60">
+            <div>
+              <h3>SEC 10-K Annual Reports Analyzer</h3>
+              <p class="muted">Web app / notebook that parses and analyzes SEC 10-K reports to extract key financial and risk information using NLP.</p>
+            </div>
+            <div class="thumbs">
+              <button class="thumb" data-img="/images/sec10k-1.jpg" aria-label="Open screenshot 1">
+                <img src="/images/sec10k-1.jpg" alt="SEC 10-K Analyzer screenshot 1" />
+              </button>
+              <button class="thumb" data-img="/images/sec10k-2.jpg" aria-label="Open screenshot 2">
+                <img src="/images/sec10k-2.jpg" alt="SEC 10-K Analyzer screenshot 2" />
+              </button>
+              <button class="thumb" data-img="/images/sec10k-3.jpg" aria-label="Open screenshot 3">
+                <img src="/images/sec10k-3.jpg" alt="SEC 10-K Analyzer screenshot 3" />
+              </button>
+            </div>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">NLP</span>
+              <span class="tag">SEC Filings</span>
+            </div>
+            <div class="project-links">
+              <span class="muted">Click thumbnails to enlarge</span>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="120">
+            <div>
+              <h3>Data-Driven WebGIS Application</h3>
+              <p class="muted">Web-based GIS platform to visualize and explore spatial data. Data loading is in progress — map shell is live but datasets are not fully loaded yet.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">WebGIS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Leaflet/Mapbox</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="https://testgis.netlify.app/#" target="_blank" rel="noopener">Open Demo</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="180">
+            <div>
+              <h3>Azerbaijani Carpet Dataset on Hugging Face</h3>
+              <p class="muted">Curated dataset of Azerbaijani carpet images, prepared for computer vision tasks such as classification and generative modeling.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Computer Vision</span>
+              <span class="tag">Dataset</span>
+              <span class="tag">Hugging Face</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="https://huggingface.co/datasets/eniyazov/aze_carpet" target="_blank" rel="noopener">View Dataset</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="240">
+            <div>
+              <h3>Real Estate Analysis Using Spark RDD</h3>
+              <p class="muted">Large-scale analysis of real-estate data using Apache Spark RDDs for price modeling and feature engineering.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Apache Spark</span>
+              <span class="tag">Python</span>
+              <span class="tag">Big Data</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="https://drive.google.com/file/d/13nwcKwrlMcz-dxFGCina4aJngiRz3Iew/view?usp=sharing" target="_blank" rel="noopener">View Report</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="300">
+            <div>
+              <h3>Hour of Code</h3>
+              <p class="muted">Volunteer activity teaching programming basics as part of the Hour of Code initiative.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Community</span>
+              <span class="tag">Education</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="https://www.facebook.com/100005887592308/posts/1748080328731537/?d=n" target="_blank" rel="noopener">View Post</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="360">
+            <div>
+              <h3>Factors Related with Depression</h3>
+              <p class="muted">Study of adults 50+ in England using survey data. Chi-square tests and logistic regression show depression is strongly associated with general health, long-standing illness, life satisfaction, loneliness, and internet use patterns, with weaker links to sex and age.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Research</span>
+              <span class="tag">Data Analysis</span>
+              <span class="tag">Logistic Regression</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="/papers/Factors_Related_with_Depression.pdf" target="_blank" rel="noopener">View Paper</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal" data-delay="420">
+            <div>
+              <h3>Audio Characteristic Analysis of Popular Songs</h3>
+              <p class="muted">Analysis of Billboard Year-End Top 100 songs (2000–2023) using standardized Spotify features. PCA produced 10 components (≥85% variance) and k-means clustering found four song categories, showing no single “formula” for top songs; length and energy are slightly negatively correlated.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Research</span>
+              <span class="tag">Data Science</span>
+              <span class="tag">PCA & Clustering</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="/papers/Audio_Characteristic_Analysis_of_Popular_Songs.pdf" target="_blank" rel="noopener">View Paper</a>
+              <a class="btn btn-ghost" href="https://github.com/eniyazov/IJC437-Intro_to_Data_Science" target="_blank" rel="noopener">View Repo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="underline"></div>
+        <div class="education-grid">
+          <div class="card reveal">
+            <h3>MSc in Data Science</h3>
+            <p class="muted">University of Sheffield</p>
+            <p class="muted">Sheffield, United Kingdom · Sep 2025 – Current</p>
+          </div>
+          <div class="card reveal" data-delay="100">
+            <h3>BS in Computer Science</h3>
+            <p class="muted">ADA University</p>
+            <p class="muted">Baku, Azerbaijan · Sep 2021 – May 2025</p>
+          </div>
+          <div class="card reveal" data-delay="200">
+            <h3>Certifications</h3>
+            <p class="muted">Add your certifications here when ready.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="underline"></div>
+        <div class="skills-grid">
+          <div class="card reveal">
+            <h3>Technical Tools</h3>
+            <div class="tags">
+              <span class="tag">Excel</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Python</span>
+              <span class="tag">R</span>
+              <span class="tag">APIs</span>
+              <span class="tag">Tableau</span>
+              <span class="tag">Git</span>
+              <span class="tag">Java</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Bash</span>
+              <span class="tag">HTML/CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="card reveal" data-delay="100">
+            <h3>Core Skills</h3>
+            <div class="tags">
+              <span class="tag">Automation</span>
+              <span class="tag">Data Analysis</span>
+              <span class="tag">Reporting</span>
+              <span class="tag">Data Modeling</span>
+              <span class="tag">Software Development</span>
+              <span class="tag">Communication</span>
+            </div>
+          </div>
+          <div class="card reveal" data-delay="200">
+            <h3>Languages</h3>
+            <div class="tags">
+              <span class="tag">English (Fluent)</span>
+              <span class="tag">Russian (Fluent)</span>
+              <span class="tag">German (Intermediate)</span>
+              <span class="tag">Azerbaijani (Fluent)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="books" class="section">
+      <div class="container">
+        <h2 class="section-title">Books I Learn From</h2>
+        <div class="underline"></div>
+        <div class="books-grid">
+          <div class="card reveal">
+            <h3>Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow</h3>
+            <p class="muted">Aurélien Géron · Practical ML patterns and workflows.</p>
+          </div>
+          <div class="card reveal" data-delay="80">
+            <h3>Pattern Recognition and Machine Learning</h3>
+            <p class="muted">Christopher Bishop · Core theory for probabilistic ML.</p>
+          </div>
+          <div class="card reveal" data-delay="140">
+            <h3>Python for Data Analysis</h3>
+            <p class="muted">Wes McKinney · Data wrangling with pandas.</p>
+          </div>
+          <div class="card reveal" data-delay="200">
+            <h3>Deep Learning</h3>
+            <p class="muted">Goodfellow, Bengio & Courville · Foundational deep learning reference.</p>
+          </div>
+          <div class="card reveal" data-delay="260">
+            <h3>Storytelling with Data</h3>
+            <p class="muted">Cole Nussbaumer Knaflic · Communicating insights clearly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Let’s Connect</h2>
+        <div class="underline"></div>
+        <div class="contact-grid">
+          <div class="card reveal">
+            <div class="list">
+              <div><strong>Email:</strong> <a href="mailto:emil.niyazov55@gmail.com">emil.niyazov55@gmail.com</a></div>
+              <div><strong>Phone:</strong> <a href="tel:+447350185730">+44 7350 185730</a></div>
+              <div><strong>Location:</strong> Sheffield, United Kingdom</div>
+            </div>
+            <div class="project-links" style="margin-top:16px;">
+              <a class="btn btn-ghost" href="https://github.com/eniyazov" target="_blank" rel="noopener">GitHub</a>
+              <a class="btn btn-ghost" href="https://linkedin.com/in/emilnyzv" target="_blank" rel="noopener">LinkedIn</a>
+              <a class="btn btn-ghost" href="https://eniyazov.com" target="_blank" rel="noopener">Personal Site</a>
+            </div>
+            <div style="margin-top:18px;">
+              <a class="btn btn-primary" href="/Emil_Niyazov_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+            </div>
+          </div>
+          <div class="card reveal" data-delay="120">
+            <form action="mailto:emil.niyazov55@gmail.com" method="post" enctype="text/plain">
+              <input type="text" name="name" placeholder="Name" required />
+              <input type="email" name="email" placeholder="Email" required />
+              <textarea name="message" placeholder="Message" required></textarea>
+              <button class="btn btn-primary" type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Emil Niyazov. All rights reserved.
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <img id="lightboxImg" alt="Project screenshot" />
   </div>
 
   <script>
-    // Spotlight follows mouse
-    window.addEventListener("pointermove", (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      document.documentElement.style.setProperty("--mx", x + "%");
-      document.documentElement.style.setProperty("--my", y + "%");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            entry.target.style.transitionDelay = delay + "ms";
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    document.querySelectorAll(".thumb").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const src = btn.getAttribute("data-img");
+        if (!src) return;
+        lightboxImg.src = src;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
     });
 
-    // Logo jumps away from cursor
-    const logo = document.querySelector(".logo");
-
-    function jumpAway() {
-      const radius = 150; // distance from center
-      const angle = Math.random() * Math.PI * 2;
-      const tx = Math.cos(angle) * radius;
-      const ty = Math.sin(angle) * radius;
-
-      logo.style.setProperty("--tx", tx + "px");
-      logo.style.setProperty("--ty", ty + "px");
-    }
-
-    // Every time pointer touches/moves over the logo, it jumps
-    logo.addEventListener("pointerenter", jumpAway);
-    logo.addEventListener("pointermove", jumpAway);
+    lightbox.addEventListener("click", () => {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+    });
   </script>
 </body>
 </html>
