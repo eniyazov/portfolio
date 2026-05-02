@@ -365,6 +365,38 @@
       gap: 20px;
     }
 
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .cert-card {
+      background: var(--bg-2);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(43, 111, 255, 0.12);
+      display: grid;
+      gap: 10px;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .cert-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(43, 111, 255, 0.1); }
+
+    .cert-thumb-btn { display: block; width: 100%; border: none; background: none; padding: 0; cursor: pointer; }
+
+    .cert-thumb { width: 100%; border-radius: 10px; aspect-ratio: 4/3; object-fit: cover; display: block; transition: opacity 150ms ease; }
+
+    .cert-thumb:hover { opacity: 0.85; }
+
+    .cert-pdf-icon {
+      width: 44px; height: 44px;
+      background: #eef3ff;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -420,10 +452,11 @@
       .projects-grid { grid-template-columns: 1fr; }
       .skills-grid, .books-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
+      .certs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 620px) {
-      .skills-grid, .books-grid { grid-template-columns: 1fr; }
+      .skills-grid, .books-grid, .certs-grid { grid-template-columns: 1fr; }
       .hero { padding-top: 90px; }
       .nav-inner { height: 64px; }
     }
@@ -463,13 +496,8 @@
             <a class="btn btn-ghost" href="/Emil_Niyazov_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
           </div>
         </div>
-        <div class="hero-card">
-          <div class="hero-visual">
-            <div>
-              <h3>Data + Design</h3>
-              <p class="muted">Building clean, insight-driven products and dashboards.</p>
-            </div>
-          </div>
+        <div class="hero-card" style="padding:0;">
+          <img src="/images/personal_photo.JPG" alt="Emil Niyazov" style="width:100%;height:380px;object-fit:cover;border-radius:28px;display:block;" />
         </div>
       </div>
     </section>
@@ -688,7 +716,62 @@
           </div>
           <div class="card reveal" data-delay="200">
             <h3>Certifications</h3>
-            <p class="muted">Add your certifications here when ready.</p>
+            <div class="certs-grid">
+
+              <div class="cert-card">
+                <button class="cert-thumb-btn" data-img="/Certificates/International_Olympiad.jpeg" aria-label="View English Olympiad diploma">
+                  <img class="cert-thumb" src="/Certificates/International_Olympiad.jpeg" alt="II Place Winner – English Olympiad" />
+                </button>
+                <div>
+                  <strong style="font-size:13px;">English Olympiad – II Place Winner</strong>
+                  <p class="muted" style="font-size:12px;margin-top:4px;">I International Internet Olympiad in English · May 2022</p>
+                </div>
+              </div>
+
+              <div class="cert-card">
+                <button class="cert-thumb-btn" data-img="/Certificates/XIGBF.jpg" aria-label="View XI Global Baku Forum certificate">
+                  <img class="cert-thumb" src="/Certificates/XIGBF.jpg" alt="Certificate of Appreciation – XI Global Baku Forum" />
+                </button>
+                <div>
+                  <strong style="font-size:13px;">Certificate of Appreciation</strong>
+                  <p class="muted" style="font-size:12px;margin-top:4px;">XI Global Baku Forum · Nizami Ganjavi International Center</p>
+                </div>
+              </div>
+
+              <div class="cert-card">
+                <div class="cert-pdf-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2b6fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div>
+                  <strong style="font-size:13px;">IBM Project Management</strong>
+                  <p class="muted" style="font-size:12px;margin-top:4px;">IBM · Professional Certificate</p>
+                </div>
+                <a class="btn btn-ghost" href="/Certificates/IBM_PM.pdf" target="_blank" rel="noopener" style="padding:8px 14px;font-size:12px;">View Certificate</a>
+              </div>
+
+              <div class="cert-card">
+                <div class="cert-pdf-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2b6fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div>
+                  <strong style="font-size:13px;">MIT – Leadership &amp; Innovation</strong>
+                  <p class="muted" style="font-size:12px;margin-top:4px;">MIT · Executive Education Certificate</p>
+                </div>
+                <a class="btn btn-ghost" href="/Certificates/MIT_Lead%26Innov.pdf" target="_blank" rel="noopener" style="padding:8px 14px;font-size:12px;">View Certificate</a>
+              </div>
+
+              <div class="cert-card">
+                <div class="cert-pdf-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2b6fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div>
+                  <strong style="font-size:13px;">Hackathon 2026</strong>
+                  <p class="muted" style="font-size:12px;margin-top:4px;">Hackathon Certificate · 2026</p>
+                </div>
+                <a class="btn btn-ghost" href="/Certificates/Hackathon_2026.pdf" target="_blank" rel="noopener" style="padding:8px 14px;font-size:12px;">View Certificate</a>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -833,7 +916,7 @@
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightboxImg");
 
-    document.querySelectorAll(".thumb").forEach((btn) => {
+    document.querySelectorAll(".thumb, .cert-thumb-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const src = btn.getAttribute("data-img");
         if (!src) return;
