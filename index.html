@@ -190,8 +190,7 @@
       100% { background-position:0% 50%; }
     }
     .photo-wrap img {
-      width:100%; height:460px;
-      object-fit:cover; object-position:top center;
+      width:100%; height:auto;
       border-radius:28px; display:block;
     }
 
@@ -252,19 +251,21 @@
     .timeline .company { color:var(--muted); font-size:13px; margin-bottom:12px; }
 
     /* ── Tags ── */
-    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; align-items:flex-start; }
     .tag {
       padding:5px 13px; border-radius:999px;
       background:var(--bg-2); font-size:12px; font-weight:500;
       color:var(--accent-2); border:1px solid rgba(43,111,255,0.18);
       transition:transform 150ms,background 150ms,box-shadow 150ms;
+      display:inline-flex; align-items:center; justify-content:center;
+      text-align:center; align-self:flex-start; line-height:1.2;
     }
     .tag:hover { transform:translateY(-2px); background:white; box-shadow:0 4px 16px rgba(43,111,255,0.15); }
 
     /* ── Projects ── */
     .projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
     .project-card { display:grid; gap:14px; }
-    .project-links { display:flex; gap:10px; flex-wrap:wrap; }
+    .project-links { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-start; }
 
     .thumbs { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
     .thumbs button {
