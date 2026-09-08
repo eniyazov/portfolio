@@ -2,467 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Emil Niyazov — Data Science Portfolio</title>
+  <title>Emil Niyazov — Data Science &amp; AI</title>
+  <meta name="description" content="Emil Niyazov — data science, machine learning, NLP, and spatial analytics. Explore selected projects and experience." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="/images/en_logo.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --bg: #f7f9fc;
-      --bg-2: #eef3ff;
-      --text: #0f172a;
-      --muted: #5b6b86;
-      --accent: #2b6fff;
-      --accent-2: #1d4ed8;
-      --card: #ffffff;
-      --shadow: 0 4px 24px rgba(15,23,42,0.07);
-      --shadow-hover: 0 16px 48px rgba(15,23,42,0.13);
-      --shadow-blue: 0 8px 32px rgba(43,111,255,0.2);
-      --radius: 20px;
-      --maxw: 1200px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: "Space Grotesk", system-ui, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .container { width: min(var(--maxw), 92vw); margin: 0 auto; }
-
-    /* ── Scroll progress ── */
-    #scroll-bar {
-      position: fixed; top: 0; left: 0;
-      height: 3px; width: 0%;
-      background: linear-gradient(90deg, var(--accent), #7c3aed);
-      z-index: 200;
-      border-radius: 0 2px 2px 0;
-    }
-
-    /* ── Animated background blobs ── */
-    .blobs {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .blob {
-      position: absolute; border-radius: 50%;
-      filter: blur(90px); opacity: 0.3;
-      animation: blob-drift 20s ease-in-out infinite;
-    }
-    .blob-1 { width:650px;height:650px;background:radial-gradient(circle,#c7d9ff,transparent);top:-200px;left:-180px;animation-delay:0s; }
-    .blob-2 { width:500px;height:500px;background:radial-gradient(circle,#ddd6fe,transparent);top:-80px;right:-120px;animation-delay:-7s; }
-    .blob-3 { width:420px;height:420px;background:radial-gradient(circle,#bae6fd,transparent);bottom:15%;left:25%;animation-delay:-14s; }
-    @keyframes blob-drift {
-      0%,100% { transform:translate(0,0) scale(1); }
-      33%      { transform:translate(28px,-18px) scale(1.04); }
-      66%      { transform:translate(-18px,26px) scale(0.97); }
-    }
-
-    main { position: relative; z-index: 1; }
-
-    /* ── Nav ── */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      background: rgba(247,249,252,0.78);
-      border-bottom: 1px solid rgba(15,23,42,0.06);
-    }
-    .nav-inner {
-      height: 72px; display: flex;
-      align-items: center; justify-content: space-between; gap: 20px;
-    }
-    .logo {
-      font-family: "Fraunces", serif; font-size: 22px; letter-spacing: 0.08em;
-      background: linear-gradient(135deg, var(--accent), #7c3aed);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .nav-links { display:flex; align-items:center; gap:4px; font-size:14px; color:var(--muted); }
-    .nav-links a { padding:6px 12px; border-radius:999px; transition:color 150ms,background 150ms; }
-    .nav-links a:hover { color:var(--text); background:var(--bg-2); }
-
-    /* ── Buttons ── */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 8px; padding: 12px 22px; border-radius: 999px;
-      font-weight: 600; font-size: 14px; border: 1px solid transparent;
-      transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
-      cursor: pointer; position: relative; overflow: hidden;
-    }
-    .btn::after {
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.28) 50%,transparent 70%);
-      transform:translateX(-100%); transition:transform 500ms ease;
-    }
-    .btn:hover::after { transform:translateX(100%); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #4f8bff);
-      color: white; box-shadow: var(--shadow-blue);
-    }
-    .btn-primary:hover {
-      background: linear-gradient(135deg, var(--accent-2), var(--accent));
-      transform: translateY(-2px);
-      box-shadow: 0 14px 38px rgba(43,111,255,0.38);
-    }
-    .btn-ghost { border-color:rgba(15,23,42,0.12); color:var(--text); background:white; }
-    .btn-ghost:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); border-color:rgba(43,111,255,0.2); }
-
-    /* ── Sections ── */
-    .section { padding: 100px 0; }
-    .section-alt { background: linear-gradient(180deg,rgba(238,243,255,0.55) 0%,rgba(247,249,252,0) 100%); }
-
-    /* ── Hero ── */
-    .hero { padding: 120px 0 90px; }
-    .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
-
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em;
-      color: var(--accent); background: rgba(43,111,255,0.08);
-      padding: 6px 14px; border-radius: 999px; margin-bottom: 22px;
-      border: 1px solid rgba(43,111,255,0.15);
-    }
-    .eyebrow-dot {
-      width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
-      animation: pulse-dot 2s ease infinite;
-    }
-    @keyframes pulse-dot {
-      0%,100% { box-shadow:0 0 0 0 rgba(34,197,94,0.4); }
-      50%      { box-shadow:0 0 0 5px rgba(34,197,94,0); }
-    }
-
-    h1 {
-      font-family: "Fraunces", serif;
-      font-size: clamp(44px, 5.5vw, 70px);
-      line-height: 1.02; margin-bottom: 4px;
-      background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-
-    .hero-role { font-size:18px; font-weight:600; color:var(--muted); margin-bottom:20px; min-height:30px; }
-    .cursor {
-      display:inline-block; width:2px; height:1.1em;
-      background:var(--accent); vertical-align:text-bottom;
-      animation:blink 1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    .hero-desc { font-size:16px; color:#475569; margin-bottom:28px; max-width:500px; line-height:1.75; }
-
-    .hero-stats { display:flex; gap:14px; margin-bottom:34px; flex-wrap:wrap; }
-    .hero-stat {
-      display:flex; flex-direction:column; align-items:center;
-      background:white; border:1px solid rgba(43,111,255,0.12);
-      border-radius:16px; padding:13px 22px; box-shadow:var(--shadow);
-      animation:float-stat 3.5s ease-in-out infinite;
-    }
-    .hero-stat:nth-child(2) { animation-delay:-1.2s; }
-    .hero-stat:nth-child(3) { animation-delay:-2.4s; }
-    @keyframes float-stat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-    .hero-stat-val { font-family:"Fraunces",serif; font-size:24px; color:var(--accent); line-height:1; }
-    .hero-stat-lbl { font-size:11px; color:var(--muted); margin-top:3px; }
-
-    .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
-
-    /* ── Photo ── */
-    .photo-wrap { position:relative; }
-    .photo-wrap::before {
-      content:""; position:absolute; inset:-4px; border-radius:32px;
-      background:linear-gradient(135deg, var(--accent), #7c3aed, #06b6d4, var(--accent));
-      background-size:300% 300%;
-      z-index:-1; opacity:0.55;
-      animation:grad-spin 5s linear infinite;
-    }
-    @keyframes grad-spin {
-      0%   { background-position:0% 50%; }
-      50%  { background-position:100% 50%; }
-      100% { background-position:0% 50%; }
-    }
-    .photo-wrap img {
-      width:100%; height:460px;
-      object-fit:cover; object-position:top center;
-      border-radius:28px; display:block;
-    }
-
-    /* ── Section headers ── */
-    .section-header { margin-bottom:50px; }
-    .section-num { font-size:12px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-    .section-title { font-family:"Fraunces",serif; font-size:clamp(28px,3.4vw,44px); line-height:1.12; }
-    .underline {
-      width:52px; height:3px;
-      background:linear-gradient(90deg, var(--accent), #7c3aed);
-      border-radius:999px; margin-top:14px; position:relative; overflow:hidden;
-    }
-    .underline::after {
-      content:""; position:absolute; left:-50%; width:50%; height:100%;
-      background:rgba(255,255,255,0.75); animation:shim 2.6s ease-in-out infinite;
-    }
-    @keyframes shim { 0%{left:-50%} 60%,100%{left:110%} }
-
-    .muted { color:var(--muted); }
-
-    /* ── Cards ── */
-    .card {
-      background:var(--card); border-radius:var(--radius); padding:28px;
-      box-shadow:var(--shadow); border:1px solid rgba(15,23,42,0.05);
-      transition:transform 240ms ease,box-shadow 240ms ease,border-color 240ms ease;
-      position:relative; overflow:hidden;
-    }
-    .card::before {
-      content:""; position:absolute; top:0; left:0; right:0; height:3px;
-      background:linear-gradient(90deg, var(--accent), #7c3aed);
-      opacity:0; transition:opacity 240ms ease;
-    }
-    .card:hover { transform:translateY(-5px); box-shadow:var(--shadow-hover); border-color:rgba(43,111,255,0.1); }
-    .card:hover::before { opacity:1; }
-
-    /* ── About ── */
-    .about-grid { display:grid; grid-template-columns:1.4fr 0.6fr; gap:24px; }
-    .list { display:grid; gap:14px; color:var(--muted); font-size:15px; }
-    .list-item { display:flex; align-items:flex-start; gap:10px; }
-    .list-dot { width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:9px;flex-shrink:0; }
-
-    /* ── Timeline ── */
-    .timeline { display:grid; gap:24px; position:relative; padding-left:30px; }
-    .timeline::before {
-      content:""; position:absolute; left:10px; top:16px; width:2px;
-      height:calc(100% - 32px);
-      background:linear-gradient(180deg, var(--accent) 0%, rgba(43,111,255,0.08) 100%);
-    }
-    .timeline-item { position:relative; }
-    .timeline-item::before {
-      content:""; position:absolute; left:-22px; top:22px;
-      width:14px;height:14px; background:white; border:3px solid var(--accent);
-      border-radius:50%; box-shadow:0 0 0 5px rgba(43,111,255,0.1);
-      transition:background 200ms,box-shadow 200ms;
-    }
-    .timeline-item:hover::before { background:var(--accent); box-shadow:0 0 0 8px rgba(43,111,255,0.15); }
-    .timeline .role { font-weight:700; font-size:17px; margin-bottom:4px; }
-    .timeline .company { color:var(--muted); font-size:13px; margin-bottom:12px; }
-
-    /* ── Tags ── */
-    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; align-items:flex-start; }
-    .tag {
-      padding:5px 13px; border-radius:999px;
-      background:var(--bg-2); font-size:12px; font-weight:500;
-      color:var(--accent-2); border:1px solid rgba(43,111,255,0.18);
-      transition:transform 150ms,background 150ms,box-shadow 150ms;
-      display:inline-flex; align-items:center; justify-content:center;
-      text-align:center; align-self:flex-start; line-height:1.2;
-    }
-    .tag:hover { transform:translateY(-2px); background:white; box-shadow:0 4px 16px rgba(43,111,255,0.15); }
-
-    /* ── Projects ── */
-    .projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
-    .project-card { display:flex; flex-direction:column; gap:14px; }
-    .project-card > div:first-child { flex:1; }
-    .project-links { display:flex; gap:10px; flex-wrap:wrap; align-items:flex-start; }
-
-    .thumbs { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-    .thumbs button {
-      border:none; background:var(--bg-2); border-radius:12px; padding:0;
-      overflow:hidden; cursor:pointer; aspect-ratio:4/3;
-      transition:transform 160ms,box-shadow 160ms;
-    }
-    .thumbs button:hover { transform:scale(1.05); box-shadow:0 8px 24px rgba(43,111,255,0.2); }
-    .thumbs img { width:100%; height:100%; object-fit:cover; }
-
-    /* ── Lightbox ── */
-    .lightbox {
-      position:fixed; inset:0; background:rgba(15,23,42,0.88);
-      backdrop-filter:blur(10px); display:none;
-      align-items:center; justify-content:center; padding:40px; z-index:100;
-    }
-    .lightbox.open { display:flex; animation:lb-in 220ms ease; }
-    @keyframes lb-in { from{opacity:0} to{opacity:1} }
-    .lightbox img {
-      max-width:min(960px,92vw); max-height:86vh;
-      border-radius:18px; box-shadow:0 40px 100px rgba(15,23,42,0.5);
-      animation:lb-scale 260ms cubic-bezier(0.34,1.56,0.64,1);
-    }
-    @keyframes lb-scale { from{transform:scale(0.86);opacity:0} to{transform:scale(1);opacity:1} }
-
-    /* ── Education ── */
-    .education-grid { display:grid; gap:20px; }
-    .edu-inner { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
-    .edu-badge {
-      flex-shrink:0; width:48px; height:48px; border-radius:14px;
-      background:var(--bg-2); border:1px solid rgba(43,111,255,0.15);
-      display:flex; align-items:center; justify-content:center; font-size:22px;
-    }
-
-    /* ── Certs ── */
-    .certs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px; }
-    .cert-card {
-      background:var(--bg-2); border-radius:14px; padding:16px;
-      border:1px solid rgba(43,111,255,0.1); display:grid; gap:10px;
-      transition:transform 200ms,box-shadow 200ms,border-color 200ms;
-    }
-    .cert-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(43,111,255,0.13); border-color:rgba(43,111,255,0.25); }
-    .cert-thumb-btn { display:block; width:100%; border:none; background:none; padding:0; cursor:pointer; border-radius:10px; overflow:hidden; }
-    .cert-thumb { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform 320ms ease; }
-    .cert-thumb-btn:hover .cert-thumb { transform:scale(1.05); }
-    .cert-pdf-icon {
-      width:44px; height:44px; background:white; border-radius:12px;
-      border:1px solid rgba(43,111,255,0.15); display:flex; align-items:center; justify-content:center;
-      box-shadow:var(--shadow);
-    }
-
-    /* ── Skills ── */
-    .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-    .skill-label { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--muted); margin-bottom:14px; }
-
-    /* ── Books ── */
-    .books-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-    .book-num { font-family:"Fraunces",serif; font-size:38px; line-height:1; color:rgba(43,111,255,0.12); margin-bottom:10px; }
-
-    /* ── Contact ── */
-    .contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:30px; }
-    .contact-row {
-      display:flex; align-items:center; gap:12px; padding:13px 0;
-      border-bottom:1px solid rgba(15,23,42,0.06); font-size:15px; transition:color 150ms;
-    }
-    .contact-row:last-of-type { border-bottom:none; }
-    .contact-row:hover { color:var(--accent); }
-    .ci {
-      width:36px; height:36px; border-radius:10px;
-      background:var(--bg-2); display:flex; align-items:center; justify-content:center; flex-shrink:0;
-    }
-    form { display:grid; gap:14px; }
-    input,textarea {
-      width:100%; padding:13px 16px; border-radius:14px;
-      border:1px solid rgba(15,23,42,0.1);
-      font-family:inherit; font-size:14px; background:white;
-      transition:border-color 150ms,box-shadow 150ms; outline:none;
-    }
-    input:focus,textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(43,111,255,0.1); }
-    textarea { min-height:140px; resize:vertical; }
-
-    /* ── Footer ── */
-    footer {
-      padding:32px 0 44px; text-align:center;
-      color:var(--muted); font-size:14px;
-      border-top:1px solid rgba(15,23,42,0.06);
-    }
-
-    /* ── Reveal animations ── */
-    .reveal {
-      opacity:0; transform:translateY(26px);
-      transition:opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1);
-    }
-    .reveal-left {
-      opacity:0; transform:translateX(-30px);
-      transition:opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1);
-    }
-    .reveal-right {
-      opacity:0; transform:translateX(30px);
-      transition:opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1);
-    }
-    .reveal.in-view, .reveal-left.in-view, .reveal-right.in-view {
-      opacity:1; transform:translate(0,0);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width:980px) {
-      .hero-grid,.about-grid,.contact-grid { grid-template-columns:1fr; }
-      .projects-grid { grid-template-columns:1fr; }
-      .skills-grid,.books-grid { grid-template-columns:1fr 1fr; }
-      .nav-links { display:none; }
-      .certs-grid { grid-template-columns:repeat(2,1fr); }
-      .photo-wrap { max-width:420px; margin:0 auto; }
-    }
-    @media (max-width:620px) {
-      .skills-grid,.books-grid,.certs-grid { grid-template-columns:1fr; }
-      .hero { padding-top:90px; }
-      .nav-inner { height:64px; }
-      .hero-stats { gap:10px; }
-    }
-  </style>
+  <link rel="stylesheet" href="/style.css?v=2" />
 </head>
 <body>
 
-  <div id="scroll-bar"></div>
-
-  <div class="blobs" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+  <a class="skip-link" href="#about">Skip to content</a>
+  <div class="intro" id="intro">
+    <span class="intro-word" id="intro-word" aria-hidden="true">Hello</span>
+    <span class="intro-caption" aria-hidden="true">FIVE LANGUAGES. ONE CURIOUS MIND.</span>
+    <button class="intro-skip" id="intro-skip" tabindex="-1">Skip intro ↗</button>
   </div>
-
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="logo" href="#top">EN</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#books">Books</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <a class="btn btn-primary" href="/EmilN_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
-    </div>
-  </nav>
-
+  <header class="nav" id="navigation">
+    <a class="logo" href="#top" aria-label="Emil Niyazov home"><span class="logo-mark">en.</span><span>Emil Niyazov</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#projects">Work</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+      <a class="nav-resume" href="/EmilN_Resume.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
   <main id="top">
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Available for opportunities
-          </div>
-          <h1>Emil Niyazov</h1>
-          <div class="hero-role"><span id="typed-role"></span><span class="cursor"></span></div>
-          <p class="hero-desc">
-            Data science student with 2+ years of experience in machine learning, analytics, and Python/SQL development.
-            Building data pipelines, NLP tools, and spatial dashboards that turn complex data into actionable insights.
-          </p>
-          <div class="hero-stats">
-            <div class="hero-stat">
-              <span class="hero-stat-val">2+</span>
-              <span class="hero-stat-lbl">Years Exp.</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-val">10+</span>
-              <span class="hero-stat-lbl">Projects</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-val">5</span>
-              <span class="hero-stat-lbl">Languages</span>
-            </div>
-          </div>
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn btn-ghost" href="/EmilN_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
-          </div>
-        </div>
-        <div class="photo-wrap reveal-right">
-          <img src="/images/portfolio_photo.jpg" alt="Emil Niyazov" />
-        </div>
-      </div>
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-photo"><img src="/images/personal_photo.jpg" alt="Portrait of Emil Niyazov" fetchpriority="high" width="1706" height="2560" /></div>
+      <div class="hero-topline"><span>DATA / INTELLIGENCE / POSSIBILITIES</span><span class="availability"><i></i> Available for opportunities</span></div>
+      <div class="location-tag"><span>Based in<br>London, UK</span><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="24" cy="24" r="18"/><ellipse cx="24" cy="24" rx="8" ry="18"/><path d="M6 24h36M9 15h30M9 33h30"/></svg></div>
+      <div class="hero-info"><span class="hero-arrow" aria-hidden="true">↘</span><p>Data Analyst &amp;<br>Data Science<br>MSc Graduate.</p><span class="hero-specialisms">MSc with Distinction<br>Machine learning · NLP · GIS</span></div>
+      <h1 class="sr-only">Emil Niyazov — Data Analyst and Data Science MSc Graduate with Distinction</h1>
+      <div class="name-marquee" aria-hidden="true"><div class="name-track" id="name-track"><span>Emil Niyazov — </span><span>Emil Niyazov — </span></div></div>
+      <div class="hero-bottom"><span>CURIOUS BY NATURE. DRIVEN BY DATA.</span><a href="#about">Scroll to explore <span aria-hidden="true">↓</span></a></div>
     </section>
-
     <!-- ABOUT -->
     <section id="about" class="section section-alt">
       <div class="container">
         <div class="section-header">
           <div class="section-num">01 — About</div>
-          <h2 class="section-title">Who I Am</h2>
+          <h2 class="section-title">Making sense of data.<br>Making something useful.</h2>
           <div class="underline"></div>
         </div>
         <div class="about-grid">
@@ -475,11 +55,16 @@
           </div>
           <div class="card reveal-right" data-delay="100">
             <div class="list">
-              <div class="list-item"><span class="list-dot"></span><span>Sheffield, United Kingdom</span></div>
+              <div class="list-item"><span class="list-dot"></span><span>London, United Kingdom</span></div>
               <div class="list-item"><span class="list-dot"></span><span>ML · Analytics · Visualization · AI</span></div>
               <div class="list-item"><span class="list-dot"></span><span>Open to: Analytics Engineer, ML Roles, AI Engineer</span></div>
             </div>
           </div>
+        </div>
+        <nav class="about-nav" aria-label="More about Emil"><a href="#education">Education &amp; certifications ↗</a><a href="#skills">Skills &amp; languages ↗</a><a href="#books">On my bookshelf ↗</a></nav>
+        <div class="about-bottom">
+          <div class="about-stats"><div><strong>2+</strong><span>Years of experience</span></div><div><strong>10+</strong><span>Projects built</span></div><div><strong>5</strong><span>Languages spoken</span></div></div>
+          <a class="circle-link" href="/EmilN_Resume.pdf" target="_blank" rel="noopener"><span>My résumé</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -489,7 +74,7 @@
       <div class="container">
         <div class="section-header">
           <div class="section-num">02 — Experience</div>
-          <h2 class="section-title">Work History</h2>
+          <h2 class="section-title">Work history.</h2>
           <div class="underline"></div>
         </div>
         <div class="timeline">
@@ -538,39 +123,37 @@
     <section id="projects" class="section section-alt">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">03 — Projects</div>
-          <h2 class="section-title">Selected Work</h2>
+          <div class="section-num">03 — Selected projects</div>
+          <h2 class="section-title">Selected work<span class="work-count">(10)</span></h2>
           <div class="underline"></div>
         </div>
         <div class="projects-grid">
 
-          <div class="card project-card reveal">
+          <div class="card project-card reveal featured-project" data-project="01">
             <div>
-              <div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f;font-size:11px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:10px;letter-spacing:0.04em;">🏆 First Prize &amp; People's Choice Award</div>
               <h3>LibrAIs — AI Video Intelligence for YouTube</h3>
-              <p class="muted" style="margin-top:8px;">Winner of the Data &amp; Design Hackathon 2026 at The University of Sheffield. A web app that takes a YouTube link and automatically transcribes it, generates subtitles, summarises the content, extracts key insights, and even identifies the University of Sheffield building where the video was recorded — helping users quickly find the most relevant content.</p>
+              <p class="muted" style="margin-top:8px;">A web app that takes a YouTube link and automatically transcribes it, generates subtitles, summarises the content, extracts key insights, and even identifies the University of Sheffield building where the video was recorded — helping users quickly find the most relevant content.</p>
             </div>
-            <div class="thumbs" style="grid-template-columns:repeat(3,1fr);">
-              <button class="thumb" data-img="/Certificates/Hackathon_poster.png" aria-label="View LibrAIs poster"><img src="/Certificates/Hackathon_poster.png" alt="LibrAIs project poster" /></button>
+            <div class="thumbs" >
+              <button class="thumb" data-img="/Certificates/Hackathon_poster.png" aria-label="View LibrAIs poster"><img loading="lazy" src="/images/librais-preview.jpg" alt="LibrAIs project poster" /></button>
             </div>
             <div class="tags">
-              <span class="tag">AI</span><span class="tag">NLP</span><span class="tag">Speech-to-Text</span><span class="tag">Summarisation</span><span class="tag">Hackathon Winner</span>
+              <span class="tag">AI</span><span class="tag">NLP</span><span class="tag">Speech-to-Text</span><span class="tag">Summarisation</span>
             </div>
             <div class="project-links">
-              <a class="btn btn-ghost" href="/Certificates/Hackathon_2026.pdf" target="_blank" rel="noopener">First Prize Certificate</a>
-              <a class="btn btn-ghost" href="/Certificates/Hackathon_2026_PCA.pdf" target="_blank" rel="noopener">People's Choice Certificate</a>
+              <button class="btn btn-ghost" data-img="/Certificates/Hackathon_poster.png" aria-label="View LibrAIs poster">View Project</button>
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="40">
+          <div class="card project-card reveal featured-project" data-project="02">
             <div>
               <h3>Baku Primary Market Residential Report 2022–2025</h3>
               <p class="muted" style="margin-top:8px;">Interactive Tableau story analyzing the primary residential market in Baku with trends, price dynamics, and key metrics for 2022–2025.</p>
             </div>
             <div class="thumbs">
-              <button class="thumb" data-img="/images/Baku_pr_1.jpeg" aria-label="Baku report screenshot 1"><img src="/images/Baku_pr_1.jpeg" alt="Baku report screenshot 1" /></button>
-              <button class="thumb" data-img="/images/Baku_pr_2.jpeg" aria-label="Baku report screenshot 2"><img src="/images/Baku_pr_2.jpeg" alt="Baku report screenshot 2" /></button>
-              <button class="thumb" data-img="/images/Baku_pr_3.jpeg" aria-label="Baku report screenshot 3"><img src="/images/Baku_pr_3.jpeg" alt="Baku report screenshot 3" /></button>
+              <button class="thumb" data-img="/images/Baku_pr_1.jpeg" aria-label="Baku report screenshot 1"><img loading="lazy" src="/images/Baku_pr_1.jpeg" alt="Baku report screenshot 1" /></button>
+              <button class="thumb" data-img="/images/Baku_pr_2.jpeg" aria-label="Baku report screenshot 2"><img loading="lazy" src="/images/Baku_pr_2.jpeg" alt="Baku report screenshot 2" /></button>
+              <button class="thumb" data-img="/images/Baku_pr_3.jpeg" aria-label="Baku report screenshot 3"><img loading="lazy" src="/images/Baku_pr_3.jpeg" alt="Baku report screenshot 3" /></button>
             </div>
             <div class="tags">
               <span class="tag">Tableau</span><span class="tag">Real Estate Analytics</span><span class="tag">Data Visualization</span>
@@ -580,21 +163,21 @@
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="80">
+          <div class="card project-card reveal featured-project" data-project="03">
             <div>
               <h3>SEC 10-K Annual Reports Analyzer</h3>
               <p class="muted" style="margin-top:8px;">Web app that parses and analyzes SEC 10-K reports to extract key financial and risk information using NLP.</p>
             </div>
             <div class="thumbs">
-              <button class="thumb" data-img="/images/sec10k-1.jpg" aria-label="Screenshot 1"><img src="/images/sec10k-1.jpg" alt="SEC 10-K screenshot 1" /></button>
-              <button class="thumb" data-img="/images/sec10k-2.jpg" aria-label="Screenshot 2"><img src="/images/sec10k-2.jpg" alt="SEC 10-K screenshot 2" /></button>
-              <button class="thumb" data-img="/images/sec10k-3.jpg" aria-label="Screenshot 3"><img src="/images/sec10k-3.jpg" alt="SEC 10-K screenshot 3" /></button>
+              <button class="thumb" data-img="/images/sec10k-1.jpg" aria-label="Screenshot 1"><img loading="lazy" src="/images/sec10k-1.jpg" alt="SEC 10-K screenshot 1" /></button>
+              <button class="thumb" data-img="/images/sec10k-2.jpg" aria-label="Screenshot 2"><img loading="lazy" src="/images/sec10k-2.jpg" alt="SEC 10-K screenshot 2" /></button>
+              <button class="thumb" data-img="/images/sec10k-3.jpg" aria-label="Screenshot 3"><img loading="lazy" src="/images/sec10k-3.jpg" alt="SEC 10-K screenshot 3" /></button>
             </div>
             <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">SEC Filings</span></div>
-            <div class="project-links"><span class="muted" style="font-size:13px;">Click thumbnails to enlarge</span></div>
+            <div class="project-links"><button class="btn btn-ghost" data-img="/images/sec10k-1.jpg" aria-label="View SEC 10-K application screenshot">View Screenshots</button></div>
           </div>
 
-          <div class="card project-card reveal" data-delay="160">
+          <div class="card project-card reveal compact-project" data-project="04">
             <div>
               <h3>Data-Driven WebGIS Application</h3>
               <p class="muted" style="margin-top:8px;">2D/3D maps, property visualization, measurements, attribute tables, layer filtering, Excel/PDF exports, image-rich pop-ups. Login: <strong>test</strong> / <strong>test123</strong>.</p>
@@ -606,7 +189,7 @@
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="240">
+          <div class="card project-card reveal compact-project" data-project="05">
             <div>
               <h3>Azerbaijani Carpet Dataset on Hugging Face</h3>
               <p class="muted" style="margin-top:8px;">Curated dataset of Azerbaijani carpet images for computer vision tasks: classification and generative modeling.</p>
@@ -617,7 +200,7 @@
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="320">
+          <div class="card project-card reveal compact-project" data-project="06">
             <div>
               <h3>Real Estate Analysis Using Spark RDD</h3>
               <p class="muted" style="margin-top:8px;">Large-scale real-estate data analysis using Apache Spark RDDs for price modeling and feature engineering.</p>
@@ -628,7 +211,7 @@
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="400">
+          <div class="card project-card reveal compact-project" data-project="07">
             <div>
               <h3>Hour of Code</h3>
               <p class="muted" style="margin-top:8px;">Volunteer activity teaching programming basics as part of the Hour of Code initiative.</p>
@@ -639,7 +222,7 @@
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="480">
+          <div class="card project-card reveal compact-project" data-project="08">
             <div>
               <h3>Factors Related with Depression</h3>
               <p class="muted" style="margin-top:8px;">Study of adults 50+ in England. Chi-square tests and logistic regression show depression is strongly linked to general health, life satisfaction, loneliness, and internet use patterns.</p>
@@ -650,7 +233,7 @@
             </div>
           </div>
 
-          <div class="card project-card reveal" data-delay="560">
+          <div class="card project-card reveal compact-project" data-project="09">
             <div>
               <h3>Audio Characteristic Analysis of Popular Songs</h3>
               <p class="muted" style="margin-top:8px;">Billboard Year-End Top 100 (2000–2023) analysis via Spotify features. PCA + k-means clustering revealed four song archetypes — no single "formula" for a hit.</p>
@@ -659,6 +242,17 @@
             <div class="project-links">
               <a class="btn btn-ghost" href="https://drive.google.com/file/d/1XbVOS_2HyMKQRVJop71hNzrX7tuBcZ2p/view?usp=drive_link" target="_blank" rel="noopener">View Paper</a>
               <a class="btn btn-ghost" href="https://github.com/eniyazov/IJC437-Intro_to_Data_Science" target="_blank" rel="noopener">View Repo</a>
+            </div>
+          </div>
+
+          <div class="card project-card reveal compact-project" data-project="10">
+            <div>
+              <h3>Predicting House Prices — Data Mining &amp; AI</h3>
+              <p class="muted" style="margin-top:8px;">Compared multiple linear regression and random forest on 1,300 Ames housing records using KNIME, model-specific preprocessing, and 10-fold cross-validation. Held-out test R² reached 0.863 for linear regression and 0.862 for random forest on log-transformed prices, showing comparable performance despite the difference in model complexity.</p>
+            </div>
+            <div class="tags"><span class="tag">KNIME</span><span class="tag">Regression</span><span class="tag">Random Forest</span><span class="tag">Real Estate</span></div>
+            <div class="project-links">
+              <a class="btn btn-ghost" href="/papers/Predicting_House_Prices_Data_Mining_AI.pdf" target="_blank" rel="noopener">View Report</a>
             </div>
           </div>
 
@@ -679,6 +273,7 @@
             <div class="edu-inner">
               <div>
                 <h3>MSc in Data Science</h3>
+                <p class="degree-result">Graduated with Distinction</p>
                 <p class="muted" style="margin-top:4px;">University of Sheffield</p>
                 <p class="muted" style="font-size:13px;margin-top:6px;">Sheffield, United Kingdom · Sep 2025 – Sep 2026</p>
               </div>
@@ -701,7 +296,7 @@
 
               <div class="cert-card">
                 <button class="cert-thumb-btn" data-img="/Certificates/International_Olympiad.jpeg" aria-label="View English Olympiad diploma">
-                  <img class="cert-thumb" src="/Certificates/International_Olympiad.jpeg" alt="English Olympiad II Place" />
+                  <img loading="lazy" class="cert-thumb" src="/Certificates/International_Olympiad.jpeg" alt="English Olympiad II Place" />
                 </button>
                 <div>
                   <strong style="font-size:13px;">English Olympiad – II Place Winner</strong>
@@ -711,7 +306,7 @@
 
               <div class="cert-card">
                 <button class="cert-thumb-btn" data-img="/Certificates/XIGBF.jpg" aria-label="View XI Global Baku Forum certificate">
-                  <img class="cert-thumb" src="/Certificates/XIGBF.jpg" alt="Certificate of Appreciation – NGIC" />
+                  <img loading="lazy" class="cert-thumb" src="/Certificates/XIGBF.jpg" alt="Certificate of Appreciation – NGIC" />
                 </button>
                 <div>
                   <strong style="font-size:13px;">Certificate of Appreciation</strong>
@@ -720,9 +315,7 @@
               </div>
 
               <div class="cert-card">
-                <div class="cert-pdf-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b6fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                </div>
+                <div class="cert-logo-box"><img loading="lazy" class="institution-logo ibm-logo" src="/images/ibm-logo.svg" alt="IBM logo" /></div>
                 <div>
                   <strong style="font-size:13px;">IBM Project Management</strong>
                   <p class="muted" style="font-size:12px;margin-top:4px;">IBM · Professional Certificate</p>
@@ -731,9 +324,7 @@
               </div>
 
               <div class="cert-card">
-                <div class="cert-pdf-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b6fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                </div>
+                <div class="cert-logo-box"><img loading="lazy" class="institution-logo mit-logo" src="/images/mit-logo.svg" alt="MIT logo" /></div>
                 <div>
                   <strong style="font-size:13px;">MIT – Leadership &amp; Innovation</strong>
                   <p class="muted" style="font-size:12px;margin-top:4px;">MIT · Executive Education</p>
@@ -842,7 +433,7 @@
       <div class="container">
         <div class="section-header">
           <div class="section-num">07 — Contact</div>
-          <h2 class="section-title">Let's Connect</h2>
+          <h2 class="section-title">Let’s make<br>something matter<span class="contact-dot">.</span></h2>
           <div class="underline"></div>
         </div>
         <div class="contact-grid">
@@ -857,7 +448,7 @@
             </a>
             <div class="contact-row" style="cursor:default;">
               <div class="ci"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <span>Sheffield, United Kingdom</span>
+              <span>London, United Kingdom</span>
             </div>
             <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;">
               <a class="btn btn-ghost" href="https://github.com/eniyazov" target="_blank" rel="noopener">GitHub</a>
@@ -869,11 +460,13 @@
             </div>
           </div>
           <div class="card reveal-right" data-delay="120">
+            <p class="form-note">Have a project or opportunity in mind? Let’s talk.</p>
             <form action="mailto:emil.niyazov55@gmail.com" method="post" enctype="text/plain">
-              <input type="text" name="name" placeholder="Your name" required />
-              <input type="email" name="email" placeholder="Your email" required />
-              <textarea name="message" placeholder="Your message" required></textarea>
-              <button class="btn btn-primary" type="submit">Send Message</button>
+              <label class="sr-only" for="contact-name">Your name</label><input id="contact-name" autocomplete="name" type="text" name="name" placeholder="Your name" required />
+              <label class="sr-only" for="contact-email">Your email</label><input id="contact-email" autocomplete="email" type="email" name="email" placeholder="Your email" required />
+              <label class="sr-only" for="contact-message">Your message</label><textarea id="contact-message" name="message" placeholder="Your message" required></textarea>
+              <button class="btn btn-primary" type="submit">Open email draft</button>
+              <p class="form-hint">Opens your email app with your message ready to send.</p>
             </form>
           </div>
         </div>
@@ -884,72 +477,14 @@
 
   <footer>
     <div class="container">
-      <p>© <span id="year"></span> Emil Niyazov · Built with care</p>
+      <div class="footer-inner"><p>© <span id="year"></span> Emil Niyazov</p><span>DATA SCIENCE &amp; A LITTLE CURIOSITY</span><a href="#top">Back to top ↑</a></div>
     </div>
   </footer>
 
   <div class="lightbox" id="lightbox" aria-hidden="true">
-    <img id="lightboxImg" alt="Screenshot" />
+    <img loading="lazy" id="lightboxImg" alt="Screenshot" />
   </div>
 
-  <script>
-    // Scroll progress
-    const scrollBar = document.getElementById("scroll-bar");
-    window.addEventListener("scroll", () => {
-      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-      scrollBar.style.width = (pct * 100) + "%";
-    }, { passive: true });
-
-    // Reveal observer (all 3 directions)
-    const ro = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const d = e.target.dataset.delay || 0;
-          e.target.style.transitionDelay = d + "ms";
-          e.target.classList.add("in-view");
-          ro.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) => ro.observe(el));
-
-    // Year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Typing effect
-    const roles = ["Data Science MSc Student", "Data Analyst", "NLP & ML Engineer", "GIS & Dashboard Builder"];
-    let ri = 0, ci = 0, del = false;
-    const typedEl = document.getElementById("typed-role");
-    function type() {
-      const w = roles[ri];
-      if (!del) {
-        typedEl.textContent = w.slice(0, ++ci);
-        if (ci === w.length) { del = true; setTimeout(type, 1800); return; }
-      } else {
-        typedEl.textContent = w.slice(0, --ci);
-        if (ci === 0) { del = false; ri = (ri + 1) % roles.length; }
-      }
-      setTimeout(type, del ? 48 : 78);
-    }
-    type();
-
-    // Lightbox
-    const lb = document.getElementById("lightbox");
-    const lbImg = document.getElementById("lightboxImg");
-    document.querySelectorAll(".thumb, .cert-thumb-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const src = btn.getAttribute("data-img");
-        if (!src) return;
-        lbImg.src = src;
-        lb.classList.add("open");
-        lb.setAttribute("aria-hidden", "false");
-      });
-    });
-    lb.addEventListener("click", () => {
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden", "true");
-      lbImg.src = "";
-    });
-  </script>
+  <script src="/app.js?v=2" defer></script>
 </body>
 </html>
