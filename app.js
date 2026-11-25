@@ -21,8 +21,8 @@ if (!reducedMotion && !location.hash) {
   const greetings = ['Hello', 'Salam', 'Привет', 'Hallo', 'Merhaba'];
   greetings.forEach((word, i) => introTimers.push(setTimeout(() => {
     document.getElementById('intro-word').textContent = word;
-  }, i * 350)));
-  introTimers.push(setTimeout(dismissIntro, 2000));
+  }, i * 220)));
+  introTimers.push(setTimeout(dismissIntro, 1300));
   document.getElementById('intro-skip').addEventListener('click', dismissIntro);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && intro.isConnected) dismissIntro(); });
 } else intro.remove();
